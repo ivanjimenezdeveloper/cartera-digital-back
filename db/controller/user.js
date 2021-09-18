@@ -10,10 +10,7 @@ const loginUsuario = async (username, password) => {
       throw crearError("Credenciales incorrectas", 403);
     }
 
-    const contrasenyaCoincide = await bcrypt.compare(
-      password,
-      usuario.password
-    );
+    const contrasenyaCoincide = password === usuario.password;
 
     if (typeof contrasenyaCoincide === "undefined" || !contrasenyaCoincide) {
       throw crearError("Credenciales incorrectas", 403);
