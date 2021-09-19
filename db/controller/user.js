@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const { crearError } = require("../../utilities/errores");
 const User = require("../model/User");
 

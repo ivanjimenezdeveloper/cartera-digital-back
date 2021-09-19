@@ -5,12 +5,15 @@ const {
   checkSchema,
   body,
 } = require("express-validator");
-const { getSaldo } = require("../../db/controller/user");
+const {
+  getTransaccionesPorUsuario,
+  getTransacciones1SemanaPorUsuario,
+} = require("../../db/controller/historialTransacciones");
 
 const router = express.Router();
 
 router.get(
-  "/saldo/:idUsuario",
+  "/semana/:idUsuario",
   check("idUsuario", "Id incorrecta").isMongoId(),
   (req, res, next) => {
     const errores = validationResult(req);
@@ -25,9 +28,9 @@ router.get(
   async (req, res, next) => {
     const { idUsuario } = req.params;
     try {
-      const saldo = await getSaldo(idUsuario);
+      const transacciones = await getTransacciones1SemanaPorUsuario(idUsuario);
 
-      res.json(saldo);
+      res.json(transacciones);
     } catch (err) {
       next(err);
     }

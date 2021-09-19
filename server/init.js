@@ -7,6 +7,7 @@ const morganfreeman = require("morgan");
 const jwt = require("jsonwebtoken");
 const routerUsuario = require("./rutas/user");
 const routerBalance = require("./rutas/balance");
+const routerTransaccion = require("./rutas/transacciones");
 
 const app = express();
 const puerto = process.env.PORT || process.env.PUERTO_SERVIDOR || 5000;
@@ -56,6 +57,7 @@ const iniciaServidor = () => {
   });
   app.use("/user", routerUsuario);
   app.use("/balance", authMiddleware, routerBalance);
+  app.use("/transaccion", authMiddleware, routerTransaccion);
 
   app.use((err, req, res, next) => {
     const codigo = err.codigo || 500;
