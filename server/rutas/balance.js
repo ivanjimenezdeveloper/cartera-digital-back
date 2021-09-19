@@ -5,6 +5,9 @@ const {
   checkSchema,
   body,
 } = require("express-validator");
+const {
+  actualizarSaldo,
+} = require("../../db/controller/historialTransacciones");
 const { getSaldo } = require("../../db/controller/user");
 
 const router = express.Router();
