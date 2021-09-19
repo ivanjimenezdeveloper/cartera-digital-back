@@ -9,7 +9,7 @@ const {
   checkSchema,
   body,
 } = require("express-validator");
-const { loginUsuario } = require("../../db/controller/user");
+const { loginUsuario, getSaldo } = require("../../db/controller/user");
 
 const router = express.Router();
 

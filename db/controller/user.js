@@ -25,6 +25,23 @@ const loginUsuario = async (username, password) => {
   }
 };
 
+const getSaldo = async (idUsuario) => {
+  try {
+    const { saldo } = await User.findById(idUsuario);
+    if ((typeof saldo === "undefined") === "undefined") {
+      return false;
+    }
+
+    return saldo;
+  } catch (err) {
+    throw crearError(
+      err.message ? err.message : "No se ha podido comprobar el saldo",
+      err.codigo ? err.codigo : 500
+    );
+  }
+};
+
 module.exports = {
   loginUsuario,
+  getSaldo,
 };
