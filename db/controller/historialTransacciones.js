@@ -22,34 +22,10 @@ const getTransaccionesPorUsuario = async (idUsuario) => {
 const ordenarHistorialPorFechaMayorMenor = (historial) =>
   historial.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-const getTransacciones1SemanaPorUsuario = async (idUsuario) => {
+const getTransaccionesPorDiasPorUsuario = async (idUsuario, dias) => {
   const historial = await getTransaccionesPorUsuario(idUsuario);
   const fechaDeCorte = new Date();
-  fechaDeCorte.setDate(fechaDeCorte.getDate() - 7);
-
-  ordenarHistorialPorFechaMayorMenor(historial);
-
-  return historial.filter(
-    (transaccion) => new Date(transaccion.fecha) > fechaDeCorte
-  );
-};
-
-const getTransacciones1MesPorUsuario = async (idUsuario) => {
-  const historial = await getTransaccionesPorUsuario(idUsuario);
-  const fechaDeCorte = new Date();
-  fechaDeCorte.setDate(fechaDeCorte.getDate() - 30);
-
-  ordenarHistorialPorFechaMayorMenor(historial);
-
-  return historial.filter(
-    (transaccion) => new Date(transaccion.fecha) > fechaDeCorte
-  );
-};
-
-const getTransacciones1AnyoPorUsuario = async (idUsuario) => {
-  const historial = await getTransaccionesPorUsuario(idUsuario);
-  const fechaDeCorte = new Date();
-  fechaDeCorte.setDate(fechaDeCorte.getDate() - 365);
+  fechaDeCorte.setDate(fechaDeCorte.getDate() - dias);
 
   ordenarHistorialPorFechaMayorMenor(historial);
 
@@ -90,9 +66,7 @@ const anyadirTransaccion = async (idUsuario, tipo, cantidad) => {
 
 module.exports = {
   getTransaccionesPorUsuario,
-  getTransacciones1SemanaPorUsuario,
-  getTransacciones1MesPorUsuario,
-  getTransacciones1AnyoPorUsuario,
+  getTransaccionesPorDiasPorUsuario,
   actualizarSaldo,
   anyadirTransaccion,
 };

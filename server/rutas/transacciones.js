@@ -1,17 +1,9 @@
 const express = require("express");
+const { check, validationResult, body } = require("express-validator");
 const {
-  check,
-  validationResult,
-  checkSchema,
-  body,
-} = require("express-validator");
-const {
-  getTransaccionesPorUsuario,
-  getTransacciones1SemanaPorUsuario,
-  getTransacciones1MesPorUsuario,
-  getTransacciones1AnyoPorUsuario,
   actualizarSaldo,
   anyadirTransaccion,
+  getTransaccionesPorDiasPorUsuario,
 } = require("../../db/controller/historialTransacciones");
 const { getSaldo } = require("../../db/controller/user");
 
@@ -33,7 +25,10 @@ router.get(
   async (req, res, next) => {
     const { idUsuario } = req.params;
     try {
-      const transacciones = await getTransacciones1SemanaPorUsuario(idUsuario);
+      const transacciones = await getTransaccionesPorDiasPorUsuario(
+        idUsuario,
+        7
+      );
 
       res.json(transacciones);
     } catch (err) {
@@ -58,7 +53,10 @@ router.get(
   async (req, res, next) => {
     const { idUsuario } = req.params;
     try {
-      const transacciones = await getTransacciones1MesPorUsuario(idUsuario);
+      const transacciones = await getTransaccionesPorDiasPorUsuario(
+        idUsuario,
+        30
+      );
 
       res.json(transacciones);
     } catch (err) {
@@ -82,7 +80,10 @@ router.get(
   async (req, res, next) => {
     const { idUsuario } = req.params;
     try {
-      const transacciones = await getTransacciones1AnyoPorUsuario(idUsuario);
+      const transacciones = await getTransaccionesPorDiasPorUsuario(
+        idUsuario,
+        365
+      );
 
       res.json(transacciones);
     } catch (err) {

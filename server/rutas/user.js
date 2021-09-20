@@ -3,12 +3,7 @@ const jwt = require("jsonwebtoken");
 const debug = require("debug")("api-prestalo:db:endpoints");
 const chalk = require("chalk");
 
-const {
-  check,
-  validationResult,
-  checkSchema,
-  body,
-} = require("express-validator");
+const { validationResult, body } = require("express-validator");
 const { loginUsuario, getSaldo } = require("../../db/controller/user");
 
 const router = express.Router();

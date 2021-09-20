@@ -1,13 +1,5 @@
 const express = require("express");
-const {
-  check,
-  validationResult,
-  checkSchema,
-  body,
-} = require("express-validator");
-const {
-  actualizarSaldo,
-} = require("../../db/controller/historialTransacciones");
+const { check, validationResult } = require("express-validator");
 const { getSaldo } = require("../../db/controller/user");
 
 const router = express.Router();
